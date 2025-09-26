@@ -1,0 +1,2 @@
+### GET request to example server
+POST http://localhost:3000/m-exp/v1/user/signup
