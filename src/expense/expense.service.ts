@@ -1,5 +1,5 @@
 // src/expenses/expenses.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable ,NotFoundException} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Expense, ExpenseDocument } from '../schema/expense.schema';
@@ -39,11 +39,18 @@ export class ExpenseService {
 
     //Update by id
     async update(expenseId: string, updateExpenseDto: UpdateExpenseDto): Promise<Expense | null> {
-        return this.expenseModel.findByIdAndUpdate(
+        const updatedExpense = await this.expenseModel.findByIdAndUpdate(
             expenseId,
             { $set: updateExpenseDto },
-            { new: true }
+            { new: true } // Return the updated document
         ).exec();
+
+        if (!updatedExpense) {
+            throw new NotFoundException(`Expense with ID "${expenseId}" not found.`);
+        }
+        return updatedExpense
+
+
     }
 
 }

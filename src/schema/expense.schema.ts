@@ -7,8 +7,7 @@ export type ExpenseDocument = HydratedDocument<Expense>;
 
 @Schema({})
 export class Expense{
-    @Prop({required: true, unique: true})
-    id: number;
+    // removed this guy since he was unecessary
 
     @Prop({ required: true })
     description: string;
