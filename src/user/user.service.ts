@@ -68,6 +68,3 @@ export class UserService {
         return { access_token: token };
     }
 }
-
-
-

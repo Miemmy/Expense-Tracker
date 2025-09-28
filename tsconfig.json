@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["express"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,
@@ -21,5 +22,9 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": [ // <--- ADD THIS INCLUDE ARRAY
+    "src/**/*", // This ensures all your source files are included
+    "src/types/**/*.d.ts" // This explicitly includes your type declaration files
+  ]
 }

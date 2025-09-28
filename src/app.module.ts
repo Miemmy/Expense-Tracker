@@ -1,13 +1,32 @@
 import { Module } from '@nestjs/common';
-import {MongooseModule} from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { UserModule } from './user/user.module';
-import { ExpenseModule } from './expense/expense.module';
-
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersModule } from './user/user.module'; // Import your UserModule
+import { ExpenseModule } from './expense/expense.module'; // Import your ExpenseModule
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://jemimauzor_db_user:0Z0R6NZ6KPfP3tny@nes101cluster.qzdhvgb.mongodb.net/expenseDB?retryWrites=true&w=majority&appName=nes101cluster'),
-      UserModule,
-      ExpenseModule,]
+    imports: [
+        // 1. Configure ConfigModule globally
+        ConfigModule.forRoot({
+            isGlobal: true, // makes the ConfigService available throughout the application
+            envFilePath: '.env', // Path to your environment file
+        }),
+        // This connects to MongoDB using the DATABASE_URL from your .env
+        MongooseModule.forRootAsync({
+            imports: [ConfigModule], // Required to inject ConfigService
+            useFactory: async (configService: ConfigService) => ({
+                uri: configService.get<string>('MONGO_URI'),
+            }),
+            inject: [ConfigService],
+        }),
+        // 3. Import your feature modules
+        UsersModule,
+        ExpenseModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
