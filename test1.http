@@ -1,2 +1,38 @@
-### GET request to example server
-POST http://localhost:3000/m-exp/v1/user/signup
+### Signup a new user
+POST http://localhost:3001/exp/v1/user/signup
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Login as the user
+POST http://localhost:3001/exp/v1/user/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123"
+}
+
+### Create a new expense
+# @name createExpense
+POST http://localhost:3001/exp/v1/expense
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGQ5YWRhYmZhY2I4N2I4OWE0NzkzMTQiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5MDk2MjU3LCJleHAiOjE3NTkxMTc4NTd9.qNUe3ozVyHbipcXz_BYX1HtAl2PutBvGe00lRp5L-g8
+
+{
+    "description": "Lunch",
+    "amount": 15,
+    "category": "Food"
+}
+
+### Get all expenses
+GET http://localhost:3001/exp/v1/expense
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGQ5YWRhYmZhY2I4N2I4OWE0NzkzMTQiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5MDk2MjU3LCJleHAiOjE3NTkxMTc4NTd9.qNUe3ozVyHbipcXz_BYX1HtAl2PutBvGe00lRp5L-g8
+
+### Delete an expense
+DELETE http://localhost:3001/exp/v1/expense/{{createExpense.response.body._id}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGQ5YWRhYmZhY2I4N2I4OWE0NzkzMTQiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5MDk2MjU3LCJleHAiOjE3NTkxMTc4NTd9.qNUe3ozVyHbipcXz_BYX1HtAl2PutBvGe00lRp5L-g8

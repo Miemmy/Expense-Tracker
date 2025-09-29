@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './user/user.module'; // Import your UserModule
+import { UserModule } from './user/user.module'; // Import your UserModule
 import { ExpenseModule } from './expense/expense.module'; // Import your ExpenseModule
 
 @Module({
@@ -13,6 +15,10 @@ import { ExpenseModule } from './expense/expense.module'; // Import your Expense
         ConfigModule.forRoot({
             isGlobal: true, // makes the ConfigService available throughout the application
             envFilePath: '.env', // Path to your environment file
+        }),
+        // Serve static files from the "public" directory
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '..', 'public'),
         }),
         // This connects to MongoDB using the DATABASE_URL from your .env
         MongooseModule.forRootAsync({
@@ -23,7 +29,7 @@ import { ExpenseModule } from './expense/expense.module'; // Import your Expense
             inject: [ConfigService],
         }),
         // 3. Import your feature modules
-        UsersModule,
+        UserModule,
         ExpenseModule,
     ],
     controllers: [AppController],

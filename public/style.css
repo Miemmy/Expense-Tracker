@@ -1,0 +1,157 @@
+/* General Body Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6; /* Cozy off-white background */
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top */
+    min-height: 100vh;
+    padding-top: 4rem; /* Add some space at the top */
+}
+
+/* Container for centered content */
+.container {
+    max-width: 800px;
+    width: 100%;
+    padding: 0 1rem; /* Add horizontal padding */
+}
+
+/* Card styling for forms and dashboard sections */
+.card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+/* Heading styles */
+h1, h2 {
+    color: #005f73; /* Muted teal for headers */
+    text-align: center;
+    margin-top: 0;
+}
+
+h2 {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Spacing between form elements */
+}
+
+input, select {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #005f73;
+    box-shadow: 0 0 0 2px rgba(0, 95, 115, 0.2);
+}
+
+/* Button Styles */
+button {
+    padding: 0.8rem 1.5rem;
+    background-color: #005f73; /* Muted teal */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0a9396; /* A slightly lighter teal for hover */
+}
+
+#logout-button {
+    background-color: #ae2012; /* A soft red for logout */
+    margin-top: 1rem;
+}
+
+#logout-button:hover {
+    background-color: #bb3e03;
+}
+
+
+/* Auth page specific styles */
+.auth-container {
+    max-width: 400px;
+    margin: auto;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.auth-link a {
+    color: #005f73;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Styles */
+#balance-container h2 {
+    border: none;
+    margin: 0;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+#balance-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0a9396;
+    line-height: 1.2;
+}
+
+/* Transactions Table */
+#transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+#transactions-table th, #transactions-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#transactions-table th {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+#transactions-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Zebra striping */
+}
+
+#transactions-table tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+/* Utility */
+.hidden {
+    display: none;
+}

@@ -5,12 +5,12 @@ import { Expense, ExpenseSchema } from '../schema/expense.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 
 
-import { UsersModule } from '../user/user.module'; // Import your UserModule which exports JwtModule and UserService
+import { UserModule } from '../user/user.module'; // Import your UserModule which exports JwtModule and UserService
 
 @Module({
     imports: [
         MongooseModule.forFeature([{ name: Expense.name, schema: ExpenseSchema }]),
-        UsersModule, // Import UserModule which exports JwtModule (configured)
+        UserModule, // Import UserModule which exports JwtModule (configured)
 
     ],
     controllers: [ExpenseController],

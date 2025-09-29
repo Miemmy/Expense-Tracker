@@ -43,24 +43,19 @@ export class ExpenseService {
     }
 
     // Delete one expense by ID
-    async remove(expenseId: string,userId
-    :string):Promise<string  | null> {
+    async remove(expenseId: string, userId: string): Promise<string | null> {
         const expenseObjectId = this.validateObjectId(expenseId, 'expense');
         const userObjectId = this.validateObjectId(userId, 'user');
-        const deletedExpense=await this.expenseModel.findByIdAndDelete(expenseObjectId).exec();
 
-        //now to handle possible errors
-        if (!deletedExpense){
-            //checking for authorization errors
-            const randomExpense:ExpenseDocument|null =await this.expenseModel.findById(expenseObjectId).exec();
-            if (randomExpense?.user.toString()!==userObjectId.toString()){
-                throw new ForbiddenException('You are not authorized to delete this expense');}
+        const deletedExpense = await this.expenseModel.findOneAndDelete({
+            _id: expenseObjectId,
+            user: userObjectId,
+        }).exec();
 
-            //if not authorization error then it is a not found error
-            throw new NotFoundException(`Expense with ID "${expenseId}" not found.`);
+        if (!deletedExpense) {
+            throw new NotFoundException(`Expense with ID "${expenseId}" not found or you are not authorized to delete it.`);
         }
-        return ("Expense deleted successfully")
-
+        return "Expense deleted successfully";
     }
 
     //Update by id
