@@ -65,7 +65,7 @@ input:focus, select:focus {
 /* Button Styles */
 button {
     padding: 0.8rem 1.5rem;
-    background-color: #005f73; /* Muted teal */
+    background-color: #4B0082; /* Dark Purple */
     color: white;
     border: none;
     border-radius: 4px;
@@ -76,7 +76,7 @@ button {
 }
 
 button:hover {
-    background-color: #0a9396; /* A slightly lighter teal for hover */
+    background-color: #6A5ACD; /* Lighter Purple */
 }
 
 #logout-button {

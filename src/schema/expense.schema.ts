@@ -1,30 +1,26 @@
 import {Prop,Schema,SchemaFactory} from '@nestjs/mongoose';
-import {HydratedDocument} from "mongoose";
+import {HydratedDocument, Types} from "mongoose";
 import {User} from "./user.schema";
-import {Types} from "mongoose"
 
 export type ExpenseDocument = HydratedDocument<Expense>;
 
 @Schema({})
 export class Expense{
-    // removed this guy since he was unecessary
 
     @Prop({ required: true })
-    description: string;
+    category: string;
 
-    @Prop({required:true})
+    @Prop({ required:true })
     amount: number;
 
-
-    @Prop({ type: Date, default: Date.now })
+    @Prop({ required: true })
     date: Date;
 
     @Prop()
-    note: string;
+    description: string;
 
     @Prop({type:Types.ObjectId, ref:User.name, required:true})
     user: Types.ObjectId;
-
 }
 
 export const ExpenseSchema = SchemaFactory.createForClass(Expense);

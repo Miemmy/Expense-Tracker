@@ -71,9 +71,9 @@ export class UserService {
 
     // LOGIN
     async login(loginDto: LoginDto): Promise<{ access_token: string }> {
-        const { username, password } = loginDto;
+        const { email, password } = loginDto;
 
-        const user = await this.userModel.findOne({ username }).exec();
+        const user = await this.userModel.findOne({ email }).exec();
         if (!user) throw new UnauthorizedException('Invalid credentials');
 
         // compare passwords

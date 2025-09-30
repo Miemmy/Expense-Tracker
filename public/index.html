@@ -3,50 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker Dashboard</title>
+    <title>Expense Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container" id="dashboard-container">
-        <h1>Dashboard</h1>
-        
-        <div class="card" id="balance-container">
-            <h2>Balance</h2>
-            <p>$<span id="balance-amount">0.00</span></p>
-        </div>
+    <div class="dashboard-container" id="dashboard-container">
+        <header class="balance-header">
+            <div class="balance-content">
+                <small>Total Expense Balance</small>
+                <h1>₦<span id="balance-amount">0.00</span></h1>
+            </div>
+            <button id="logout-button" class="logout-btn">Logout</button>
+        </header>
 
-        <div class="card" id="add-transaction-container">
-            <h2>Add New Transaction</h2>
-            <form id="add-transaction-form">
-                <select id="transaction-type" required>
-                    <option value="expense">Expense</option>
-                    <option value="income">Income</option> <!-- Note: API currently only handles expenses -->
-                </select>
-                <input type="number" id="transaction-amount" placeholder="Amount" required step="0.01">
-                <input type="text" id="transaction-category" placeholder="Category" required>
-                <input type="text" id="transaction-description" placeholder="Description" required>
-                <input type="date" id="transaction-date" required>
-                <button type="submit">Add Transaction</button>
+        <main class="content-area">
+            <section class="card transaction-form-section">
+                <h2>Add New Expense</h2>
+                <form id="add-transaction-form">
+                    <div class="form-group">
+                        <label for="transaction-category">Category</label>
+                        <input type="text" id="transaction-category" placeholder="e.g., Food, Bills, Shopping" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-amount">Amount</label>
+                        <input type="number" id="transaction-amount" placeholder="0.00" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-date">Date</label>
+                        <input type="date" id="transaction-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-description">Description (Optional)</label>
+                        <input type="text" id="transaction-description" placeholder="e.g., Dinner with friends">
+                    </div>
+                    <button type="submit" class="btn-submit">Add Expense</button>
+                </form>
+            </section>
+
+            <section class="card transactions-section">
+                <h2>Recent Expenses (Last 3 Days)</h2>
+                <div class="table-responsive">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-transactions-list">
+                            <!-- Rows will be injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card transactions-section">
+                <h2>Expense History</h2>
+                <div class="table-responsive">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-transactions-list">
+                            <!-- Rows will be injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Expense Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Edit Expense</h2>
+            <form id="edit-transaction-form">
+                <input type="hidden" id="edit-transaction-id">
+                <div class="form-group">
+                    <label for="edit-transaction-category">Category</label>
+                    <input type="text" id="edit-transaction-category" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-transaction-amount">Amount</label>
+                    <input type="number" id="edit-transaction-amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-transaction-date">Date</label>
+                    <input type="date" id="edit-transaction-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-transaction-description">Description</label>
+                    <input type="text" id="edit-transaction-description">
+                </div>
+                <button type="submit" class="btn-submit">Update Expense</button>
             </form>
         </div>
-
-        <div class="card" id="transactions-container">
-            <h2>Transactions</h2>
-            <table id="transactions-table">
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="transactions-list"></tbody>
-            </table>
-        </div>
-
-        <button id="logout-button">Logout</button>
     </div>
 
     <script src="script.js"></script>
