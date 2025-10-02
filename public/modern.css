@@ -115,6 +115,7 @@ body {
 /* Responsive Design */
 @media (max-width: 600px) {
     body { padding: 10px; }
+    .dashboard-container { width: 100%; }
     .balance-header { flex-direction: column; align-items: flex-start; }
     .logout-btn { margin-top: 15px; }
     .card { padding: 20px; }
