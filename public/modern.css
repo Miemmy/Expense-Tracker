@@ -1,4 +1,3 @@
-/* public/modern.css */
 :root {
     --primary-color: #8A2BE2; /* BlueViolet */
     --neon-purple-start: #9D00FF; /* Electric Purple */
@@ -17,10 +16,23 @@ body {
     background-color: var(--light-bg);
     color: var(--text-color);
     margin: 0;
-    padding: 20px;
+    /* CHANGED: Padding removed from body to prevent layout conflicts. */
 }
 
-.dashboard-container { max-width: 900px; margin: 0 auto; }
+/* CHANGED: Padding is now controlled by the container itself. */
+.dashboard-container { 
+    max-width: 1200px; /* CHANGED: Increased max-width for a better desktop view. */
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+/* ADDED: A modern grid layout for the main content areas. */
+.content-area {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Form on left, tables on right */
+    gap: 30px; /* Space between columns */
+    align-items: start;
+}
 
 .balance-header {
     padding: 30px;
@@ -113,10 +125,21 @@ body {
 
 
 /* Responsive Design */
-@media (max-width: 600px) {
-    body { padding: 10px; }
-    .dashboard-container { width: 100%; }
+/* CHANGED: Using a more standard breakpoint for this kind of layout change. */
+@media (max-width: 768px) {
+    /* CHANGED: Reducing container padding on mobile. */
+    .dashboard-container { padding: 10px; }
+    
+    /* ADDED: This is the KEY FIX. It stacks the form and tables vertically. */
+    .content-area {
+        grid-template-columns: 1fr; /* Change from two columns to one */
+    }
+
     .balance-header { flex-direction: column; align-items: flex-start; }
+    
+    /* ADDED: Reducing font size on mobile for better fit. */
+    .balance-content h1 { font-size: 2.5rem; }
+
     .logout-btn { margin-top: 15px; }
     .card { padding: 20px; }
     .modal-content { width: 95%; margin-top: 25%; }
